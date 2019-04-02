@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url("https://wallpapercave.com/wp/wp2610923.jpg");
+        }
+
+        #intro {
+
+            padding-top: 100px;
+            text-align: center;
+
+        }
+
+        #choice {
+            background-color: white;
+            margin-top: 50px;
+            height: 200px;
+            opacity: 0.7;
+            text-align: center;
+
+        }
+
+        #scoresBox {
+            margin-top: 50px;
+
+
+
+        }
+
+        #buttons {
+
+            margin-top: 70px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container" id="intro">
+        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <h1> Rock Paper Scissors </h1>
+            </div>
+
+        </div>
+        <br>
+        <br>
+
+        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+        <div class="row" id="choice">
+
+            <div class="col-6 col-md-4"><button type="button" class="btn btn-secondary btn-lg btn-block" id="buttons"
+                    id="rockButton" onclick=rockFunction()>Rock</button></div>
+            <div class="col-6 col-md-4"><button type="button" class="btn btn-secondary btn-lg btn-block" id="buttons"
+                    id="paperButton" onclick=paperFunction()>Paper</button></div>
+            <div class="col-6 col-md-4"><button type="button" class="btn btn-secondary btn-lg btn-block" id="buttons"
+                    id="scissorsButton" onclick=scissorsFunction()>Scissors</button></div>
+
+        </div>
+        <div class="row" id="choice">
+            <div class="col-12">
+                <h3 id="compChoice"> </h3><h3 id="playerChoice"></h3>
+                <hr>
+                <h2 id="whoWins"></h2>
+            </div>
+
+
+        </div>
+        <!-- Columns are always 50% wide, on mobile and desktop -->
+        <div class="row" id="scoresBox">
+            <div class="col-6">
+                <h2> User Score </h2>
+                <h3 id="userTotal"></h3>
+            </div>
+            <div class="col-6">
+                <h2> Computer Score </h2>
+                <h3 id="compTotal"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+    <!-- ### File
+
+    * [`rps-2`](Unsolved/rps-2.html)
+
+    ### Instructions
+
+    * In groups of 4, begin the process of coding out the rock-paper-scissors game.
+
+    **Rules for rock-paper-scissors**
+
+    Rock: wins against scissors, loses to paper, and ties against itself.
+    Paper: wins against rock, loses to scissors, and ties against itself.
+    Scissors: wins against paper, loses to rock, and ties against itself.
+
+    ![3-RPS-Example-Picture](Images/9-RPS-example.png)
+
+    * Do as much as you can on your own, but don't be afraid to ask for help if you feel your team is struggling.
+
+    * **NOTE:** A `for-loop` is not technically necessary to make our RPS game, but could be used. Focus on the topics
+    we
+    have just covered when thinking about how to build out the game.
+
+    * **NOTE:** Don’t use `document.write` as it will delete the contents of your page including your JavaScript. Use
+    `document.querySelector` or `document.getElementById`, alongside either `innerHTML` or `textContent`, to write to
+    the
+    DOM. -->
+
+    <script>
+
+        // rules of game 
+        var userScore = [];
+
+        var computerScore = [];
+
+        var userTotalWins = 0;
+
+        var computerTotalWins = 0;
+
+        var rock = "rock";
+        var scissors = "scissors";
+        var paper = "paper";
+
+        var userInput = "";
+
+        var computerInput = "";
+
+      
+        function rockFunction() {
+            userInput = "rock";
+            computerChoice();
+            result();
+            
+        }
+
+        function paperFunction() {
+
+            userInput = "paper"
+            computerChoice();
+            result();
+            
+        }
+
+
+        function scissorsFunction() {
+
+            userInput = "scissors";
+            computerChoice();
+            result();
+           
+        }
+
+
+        function computerChoice() {
+
+            computerInput = Math.floor(Math.random()*3)+1;
+            if( computerInput === 1){
+                computerInput = "rock";
+                document.getElementById("compChoice").innerHTML = "Computer picked:  " + computerInput;
+                document.getElementById("playerChoice").innerHTML = " You picked: " + userInput;
+            }
+            else if ( computerInput === 2){
+                computerInput = "paper";
+                document.getElementById("compChoice").innerHTML = "Computer picked:  " + computerInput;
+                document.getElementById("playerChoice").innerHTML = " You picked: " + userInput;
+            }
+            else {
+                computerInput = "scissors";
+                document.getElementById("compChoice").innerHTML = "Computer picked:  " + computerInput;
+                document.getElementById("playerChoice").innerHTML = " You picked: " + userInput;
+            }
+           
+
+        }
+
+
+        function result() {
+            console.log(userInput);
+            console.log(computerInput);
+
+            if (userInput === rock && computerInput === scissors) {
+                console.log("player wins");
+                document.getElementById("whoWins").innerHTML = "Player wins!";
+                userTotalWins++;
+
+            }
+            else if (userInput === rock && computerInput === paper) {
+                console.log("computer wins");
+                document.getElementById("whoWins").innerHTML = "Computer wins!";
+                computerTotalWins++;
+
+            }
+            else if (userInput === rock && computerInput === rock) {
+                console.log("draw");
+                document.getElementById("whoWins").innerHTML = "It's a Draw!";
+
+            }
+
+            else if (userInput === scissors && computerInput === paper) {
+                console.log("player wins");
+                document.getElementById("whoWins").innerHTML = "Player wins!";
+                userTotalWins++;
+            }
+
+            else if (userInput === scissors && computerInput === rock) {
+                console.log("computer wins");
+                document.getElementById("whoWins").innerHTML = "Computer wins!";
+               computerTotalWins++
+
+            }
+
+            else if (userInput === scissors && computerInput === scissors) {
+                console.log("draw");
+                document.getElementById("whoWins").innerHTML = "It's a Draw!";
+            }
+
+            else if (userInput === paper && computerInput === rock) {
+                document.getElementById("whoWins").innerHTML = "Player wins!";
+               userTotalWins++;
+            }
+            else if (userInput === paper && computerInput === scissors) {
+                console.log("computer wins");
+                document.getElementById("whoWins").innerHTML = "Computer wins!";
+                computerTotalWins++;
+
+            }
+            else {
+                console.log("draw");
+                document.getElementById("whoWins").innerHTML = "It's a Draw!";
+
+            };
+            updateScores();
+        };
+
+        
+
+        function updateScores() {
+            document.getElementById("compTotal").innerHTML = computerTotalWins;
+            document.getElementById("userTotal").innerHTML = userTotalWins;
+
+        }
+
+
+        //display winner and update scores
+
+        //finished, play again?
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
